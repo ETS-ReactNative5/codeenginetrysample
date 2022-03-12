@@ -1,9 +1,0 @@
-components:
-  schemas:
-    FilterType:
-      type: string
-      enum:
-        - rental_company
-        - name
-        - body_type
-        - style
