@@ -71,22 +71,19 @@ ibmcloud ce project create -n "Bee Travels"
 ```
 It creates a Code Engine project named `Bee Travels`. A project is a grouping of Code Engine applications and jobs. Creating a project allows for network isolation, sharing of resources (ex. secrets), and grouping together applications and jobs that are related.
 
-To see list of projects in the targetted resource group -  `ibmcloud ce project list`
+To see list of projects in the targetted resource group - 
+`ibmcloud ce project list`
 
 Navigate here:
-
 https://cloud.ibm.com/codeengine/projects
-
 "Bee Travels" is listed .
+![](img/code_engine_project.png)
 
 6. Unique ID of the Project:
 
 ```
 ibmcloud ce proj current |grep "Context:"|awk '{print $2}'
 ``` 
-
-Note the above ID.
-
 It is responsible for getting the unique ID of the project. Each project has an associated unique ID that is used as part of the endpoints defined for the apps within that project. This is needed for getting the URLs of applications for internal traffic to the project which will be shown later.
 
 7.  Create Namespace in Container Registry:
@@ -96,15 +93,15 @@ Switch to a Location say Tokyo
 Create a namespace "cesample"
 
 8. Add registry access to Code Engine
-
 Navigate to https://cloud.ibm.com/iam/apikeys
-
 Click Create an IBM Cloud API key.
 Enter a name and optional description for your API key and click Create.
 Copy the API key or click download to save it.
 
-Ex:
+Example:
+
 Name: registryJP
+
 API key: CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw
 
 9. Creating image registry access secret:
@@ -230,12 +227,17 @@ Run `ibmcloud ce application logs -f -n destination-v1` to follow the logs of th
  ibmcloud ce app create -n "ui" -i "jp.icr.io/cesample/ui" -p 9000 --min 1 --cpu 0.25 -m 0.5G -e NODE_ENV=production -e DESTINATION_URL=http://destination-v1.iz7gckmh5qv.svc.cluster.local --registry-secret myregistryjp
 
 ```
+ 
+ ![](img/code_engine_url.png)
+ 
 It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires external traffic. Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other microservices. Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was gotten from one of the previous commands in this script.
 
 For more information for troubleshooting:
 
 Run `ibmcloud ce application get -n ui` to check the application status.
+ 
 Run `ibmcloud ce application events -n ui` to get the system events of the application instances.
+ 
 Run `ibmcloud ce application logs -f -n ui` to follow the logs of the application instances.
 
 Notice how the minimum number of instances for each application of Bee Travels is set to 1: `--min 1`. This is due to the fact that we want Bee Travels to always be readily available for traffic without delay and needing an instance to be initialized via cold start. Use cases for using the default value of 0 for the mimimum number of instances for each application include:
