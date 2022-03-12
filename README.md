@@ -43,7 +43,7 @@ To follow the steps in this code pattern, you need the following:
 Clone the `CESample` repo locally. In a terminal window, run:
 
 ```
-$ git clone https://github.com/testrashmi/CESample
+$ git clone https://github.com/testrashmi/codeenginetrysample
 $ cd CESample
 ```
 
@@ -108,14 +108,11 @@ Ex:
 Name: registryJP
 API key: CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw
 
-_ZaAa6sZ4y20m-oqSIK4n2Ukeqdip9urTmWvj4xTWxyQ
-
 9. Creating image registry access secret:
 
 ```
- ibmcloud ce registry create --n myregistryjp --s jp.icr.io --u iamapikey --p "CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw"
+ibmcloud ce registry create --n myregistryjp --s jp.icr.io --u iamapikey --p "CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw"
 ```
-
 
 * `-n` names the image registry access secret
 * `-u` specifies the username to access the registry server
@@ -126,15 +123,11 @@ For Docker Hub, the server name is https://index.docker.io/v1/
 For Container Registry, the server name is <region>.icr.io
 
 10. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects
-
 Select Registry Access on the left hand side
-
 "myregistryjp" is listed
 
 9. The docker build command builds Docker images from a Dockerfile
-
-Switch to the directory 'src/services/ui' in the gitrepo CESample:
-
+Switch to the directory 'src/services/ui' in the gitrepo codeenginetrysample:
 Execute:
 
 ```
@@ -167,8 +160,6 @@ The image created gets listed here:
 
 https://cloud.ibm.com/registry/images
 
-
-
 13. Create a build configuration:
 
 ```
@@ -184,11 +175,8 @@ It creates a build configuration that will turn the source code from Github into
 * `--cdr` specifies the directory in the Github repo where the Dockerfile to be used is
 * `--sz` specifies the size for the build which determines the amount of resources used. This is optional and the default value is `medium`.
 
-9. 
-Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects
-
+9. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects
 Select "Image Builds" on the left hand side
-
 "destination-v1-build" is listed
 
 10. Creating a build run from a repository:
@@ -205,18 +193,18 @@ It starts and runs the build configuration that was created on the previous line
 For more information for troubleshooting:
 
 `ibmcloud ce buildrun get -n destination-v1-buildrun`
+ 
 `ibmcloud ce buildrun events -n destination-v1-buildrun`
+ 
 `ibmcloud ce buildrun logs -f -n destination-v1-buildrun`
 
 12. The image created can be found here:
-
 https://cloud.ibm.com/registry/images
-
 Click on the image:
-
 Image details are seen .
 
 13. Deploying your app:
+ 
 ```
  ibmcloud ce app create -n "destination-v1" -i "jp.icr.io/cesample/destination" -cl -p 9001 --min 1 --cpu 0.25 -m 0.5G -e LOG_LEVEL=info --registry-secret myregistryjp
 ```
@@ -234,16 +222,15 @@ It creates an application in our Code Engine project for our destination microse
 For more information for troubleshooting:
 
 Run `ibmcloud ce application get -n destination-v1` to check the application status.
-
+ 
 Run `ibmcloud ce application events -n destination-v1` to get the system events of the application instances.
-
+ 
 Run `ibmcloud ce application logs -f -n destination-v1` to follow the logs of the application instances.
 
 ```
  ibmcloud ce app create -n "ui" -i "jp.icr.io/cesample/ui" -p 9000 --min 1 --cpu 0.25 -m 0.5G -e NODE_ENV=production -e DESTINATION_URL=http://destination-v1.iz7gckmh5qv.svc.cluster.local --registry-secret myregistryjp
 
 ```
-
 It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires external traffic. Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other microservices. Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was gotten from one of the previous commands in this script.
 
 For more information for troubleshooting:
