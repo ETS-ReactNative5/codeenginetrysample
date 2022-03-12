@@ -41,7 +41,7 @@ Clone the `CESample` repo locally. In a terminal window, run:
 
 ```
 $ git clone https://github.com/testrashmi/codeenginetrysample
-$ cd CESample
+$ cd codeenginetrysample
 ```
 
 ## 3. Build and Deploy to Code Engine
