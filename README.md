@@ -16,12 +16,9 @@ Below is the architecture diagram for v1 of the Bee Travels application:
 
 # Architecture
 
-![](img/architecture.png)
-
 1. The Code Engine build feature clones the Github repo and builds the container images for the different Bee Travels microservices in the repo based on the provided Dockerfiles.
 2. The newly built container images get pushed to repos on the provided image registry which in this case is Dockerhub.
 3. Code Engine applications are created for the Bee Travels microservices from the newly built container images on Dockerhub.
-4. The IBM load generation tool generates traffic to the Bee Travels application running in Code Engine. The auto-scaling component of Code Engine adjusts the number of running instances of the application based on the amount of incoming traffic.
 
 # Steps
 
@@ -49,7 +46,8 @@ $ cd CESample
 
 ## 3. Build and Deploy to Code Engine
 
-1. From a terminal window, login to your IBM Cloud account using the CLI command: `ibmcloud login --sso`
+1. From a terminal window, login to your IBM Cloud account using the CLI command:
+ `ibmcloud login --sso`
 
 2. Verify you are targeting the correct region, account, resource group, org and space by running `ibmcloud target`.
  To set any of these to new targets, add `-h` to the command to view the necessary flags for changing the targets  `ibmcloud target -h`
@@ -57,6 +55,7 @@ $ cd CESample
 `ibmcloud target -g RESOURCE_GROUP`
 
 ex:
+
 `ibmcloud target -g App`
 
 3. Install the IBM Cloud Code Engine plug-in for the IBM Cloud CLI by running: `ibmcloud plugin install code-engine`
