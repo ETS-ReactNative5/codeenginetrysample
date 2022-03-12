@@ -1,8 +1,0 @@
-components:
-  schemas:
-    FilterType:
-      type: string
-      enum:
-        - superchain
-        - name
-        - type
