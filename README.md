@@ -70,28 +70,28 @@ To follow the steps in this code pattern, you need the following:
 
 5. Create a project
 
-  ```
-  ibmcloud ce project create -n "Bee Travels"
-  ```
-   It creates a Code Engine project named `Bee Travels`. A project is a grouping of Code Engine applications and jobs. Creating a project allows for network 
-   isolation, sharing of resources (ex. secrets), and grouping together applications and jobs that are related.
+   ```
+   ibmcloud ce project create -n "Bee Travels"
+   ```
+    It creates a Code Engine project named `Bee Travels`. A project is a grouping of Code Engine applications and jobs. Creating a project allows for network 
+    isolation, sharing of resources (ex. secrets), and grouping together applications and jobs that are related.
 
-   To see list of projects in the targetted resource group 
+    To see list of projects in the targetted resource group 
 
-   `ibmcloud ce project list`
+    `ibmcloud ce project list`
 
-   Navigate here:
-   https://cloud.ibm.com/codeengine/projects .
-   "Bee Travels" is listed .
-   ![](img/code_engine_project.png)
+    Navigate here:
+    https://cloud.ibm.com/codeengine/projects .
+    "Bee Travels" is listed .
+    ![](img/code_engine_project.png)
 
 6. To determine the unique ID of the Project:
 
-   ```
-   ibmcloud ce proj current |grep "Context:"|awk '{print $2}'
-   ``` 
-   It is responsible for getting the unique ID of the project. Each project has an associated unique ID that is used as part of the endpoints defined for the apps 
-   within that project. This is needed for getting the URLs of applications for internal traffic to the project which will be shown later.
+    ```
+    ibmcloud ce proj current |grep "Context:"|awk '{print $2}'
+    ``` 
+    It is responsible for getting the unique ID of the project. Each project has an associated unique ID that is used as part of the endpoints defined for the apps 
+    within that project. This is needed for getting the URLs of applications for internal traffic to the project which will be shown later.
 
 7.  Create Namespace in Container Registry:
 
@@ -103,36 +103,36 @@ To follow the steps in this code pattern, you need the following:
 
 8. Add registry access to Code Engine.
 
-   Navigate to https://cloud.ibm.com/iam/apikeys .
+    Navigate to https://cloud.ibm.com/iam/apikeys .
 
-   Click Create an IBM Cloud API key.
+    Click Create an IBM Cloud API key.
 
-   Enter a name and optional description for your API key and click Create.
+    Enter a name and optional description for your API key and click Create.
 
-   Copy the API key or click download to save it.
+    Copy the API key or click download to save it.
 
-   Example:
+    Example:
 
-   Name: registryJP
+    Name: registryJP
 
-   API key: CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw
+    API key: CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw
 
 9. Creating image registry access secret:
 
-   ```
-   ibmcloud ce registry create --n myregistryjp --s jp.icr.io --u iamapikey --p "CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw"
-   ```
+    ```
+    ibmcloud ce registry create --n myregistryjp --s jp.icr.io --u iamapikey --p "CoDKpQraJN94KeF5bvx6d_Y9FWiW8sbKA49lcp9Il4Sw"
+    ```
 
-   * `-n` names the image registry access secret
-   * `-u` specifies the username to access the registry server
-   * `-p` specifies the password to access the registry server
-   * `-s` is the URL of the registry server
+    * `-n` names the image registry access secret
+    * `-u` specifies the username to access the registry server
+    * `-p` specifies the password to access the registry server
+    * `-s` is the URL of the registry server
 
-   For Docker Hub, the server name is https://index.docker.io/v1/ .
+    For Docker Hub, the server name is https://index.docker.io/v1/ .
 
-   For Container Registry, the server name is `region.icr.io` .
+    For Container Registry, the server name is `region.icr.io` .
 
-   ![](img/registryacess.png)
+    ![](img/registryacess.png)
 
 9. Lets try building image using docker command.
  
