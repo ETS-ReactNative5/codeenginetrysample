@@ -226,7 +226,7 @@ To follow the steps in this code pattern, you need the following:
 
      Click on the image and the image details are seen .
 
-18. Deploying your app destination-v1  :
+18. [Deploying your app](https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli#cli-application-create) destination-v1  :
  
      ```
      ibmcloud ce app create -n "destination-v1" -i "jp.icr.io/cesample/destination" -cl -p 9001 --min 1 --cpu 0.25 -m 0.5G -e LOG_LEVEL=info --registry-secret
