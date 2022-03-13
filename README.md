@@ -80,7 +80,7 @@ To follow the steps in this code pattern, you need the following:
 
     `ibmcloud ce project list`
 
-    Navigate here:
+    Navigate to:
     https://cloud.ibm.com/codeengine/projects .
     "Bee Travels" is listed .
     
