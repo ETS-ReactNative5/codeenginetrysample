@@ -129,7 +129,7 @@ To follow the steps in this code pattern, you need the following:
     * `-p` specifies the password to access the registry server
     * `-s` is the URL of the registry server
 
-    For Docker Hub, the server name is https://index.docker.io/v1/ .
+    For Docker Hub, the server name is `https://index.docker.io/v1/` .
 
     For Container Registry, the server name is `region.icr.io` .
 
