@@ -16,7 +16,7 @@ Below is the architecture diagram of the Bee Travels application:
 
 # Architecture
 
-1. The Code Engine build feature clones the Github repo and builds the container images for the different Bee Travels microservices in the repo based on the provided Dockerfiles.
+1. The Code Engine build feature clones the Github repo and builds the container images for the Bee Travels microservices in the repo based on the provided Dockerfiles.
 2. The newly built container images get pushed to repos on the provided [image registry](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started) which in this case is IBM Cloud Container Registry.
 3. Code Engine applications are created for the Bee Travels microservices from the newly built container images on IBM Cloud Container Registry.
 
@@ -45,18 +45,23 @@ $ cd codeenginetrysample
 ## 3. Build and Deploy to Code Engine
 
 1. From a terminal window, login to your IBM Cloud account using the CLI command:
+
  `ibmcloud login --sso`
 
 2. Verify you are targeting the correct region, account, resource group, org and space by running
+
  `ibmcloud target`.
  To set any of these to new targets, add `-h` to the command to view the necessary flags for changing the targets  `ibmcloud target -h`
+ 
 Example:
 
 `ibmcloud target -g RESOURCE_GROUP`
 
 `ibmcloud target -g App`
 
-3. Install the IBM Cloud Code Engine plug-in for the IBM Cloud CLI by running: `ibmcloud plugin install code-engine`
+3. Install the IBM Cloud Code Engine plug-in for the IBM Cloud CLI by running: 
+
+`ibmcloud plugin install code-engine`
 
 4. Verify the plug-in is installed by running `ibmcloud plugin list` and seeing `code-engine[ce]` in the list of plug-ins.
 
@@ -69,15 +74,16 @@ ibmcloud ce project create -n "Bee Travels"
 ```
 It creates a Code Engine project named `Bee Travels`. A project is a grouping of Code Engine applications and jobs. Creating a project allows for network isolation, sharing of resources (ex. secrets), and grouping together applications and jobs that are related.
 
-To see list of projects in the targetted resource group - 
+To see list of projects in the targetted resource group 
+
 `ibmcloud ce project list`
 
 Navigate here:
-https://cloud.ibm.com/codeengine/projects
+https://cloud.ibm.com/codeengine/projects .
 "Bee Travels" is listed .
 ![](img/code_engine_project.png)
 
-6. Unique ID of the Project:
+6. To determine the unique ID of the Project:
 
 ```
 ibmcloud ce proj current |grep "Context:"|awk '{print $2}'
@@ -86,14 +92,20 @@ It is responsible for getting the unique ID of the project. Each project has an 
 
 7.  Create Namespace in Container Registry:
 
-Navigate to https://cloud.ibm.com/registry/namespaces
-Switch to a Location say Tokyo
-Create a namespace "cesample"
+Navigate to https://cloud.ibm.com/registry/namespaces .
 
-8. Add registry access to Code Engine
-Navigate to https://cloud.ibm.com/iam/apikeys
+Switch to a Location say Tokyo.
+
+Create a namespace say "cesample".
+
+8. Add registry access to Code Engine.
+
+Navigate to https://cloud.ibm.com/iam/apikeys .
+
 Click Create an IBM Cloud API key.
+
 Enter a name and optional description for your API key and click Create.
+
 Copy the API key or click download to save it.
 
 Example:
@@ -113,44 +125,49 @@ ibmcloud ce registry create --n myregistryjp --s jp.icr.io --u iamapikey --p "Co
 * `-p` specifies the password to access the registry server
 * `-s` is the URL of the registry server
 
-For Docker Hub, the server name is https://index.docker.io/v1/
-For Container Registry, the server name is <region>.icr.io
+For Docker Hub, the server name is https://index.docker.io/v1/ .
 
-10. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects
-Select Registry Access on the left hand side
-"myregistryjp" is listed
+For Container Registry, the server name is '<region>.icr.io' .
 
-9. The docker build command builds Docker images from a Dockerfile
-Switch to the directory 'src/services/ui' in the gitrepo codeenginetrysample:
-Execute:
+10. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
+![](img/registryacess.png)
+
+9. Lets try building image using docker command.
+ 
+The docker build command builds Docker images from a Dockerfile.
+ 
+Switch to the directory 'src/services/ui' in the gitrepo codeenginetrysample.
+ 
+Then,
 
 ```
 docker build -t <image_name> <directory>
 ```
-ex:
+example:
+ 
 `docker build -t ui .`
 
- To list docker images - `docker images`
-
- Execute :
+ To list docker images:
  
-  `docker tag ui:latest jp.icr.io/cesample/ui:latest`
+ `docker images`
 
-10. Log in to IBM Cloud Container Registry 
+ Then,
+ 
+ `docker tag ui:latest jp.icr.io/cesample/ui:latest`
 
- Execute:
+10. Log in to IBM Cloud Container Registry.
+ 
 `ibmcloud cr region-set jp.icr.io`
 
-11. docker image push to share your images to the registry
-Execute:
+11. Perform docker image push to share your images to the registry.
+ 
 `docker push jp.icr.io/cesample/ui:latest`
 
-12. To ensure image is created:
-
-Execute:
+12. To ensure the image is created:
+ 
 `ibmcloud cr images`
 
-The image created gets listed here:
+The image created gets listed with location chosen as Tokyo.
 
 https://cloud.ibm.com/registry/images
 
