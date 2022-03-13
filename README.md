@@ -50,10 +50,11 @@ To follow the steps in this code pattern, you need the following:
 
 2. Verify you are targeting the correct region, account, resource group, org and space by running
 
-
    `ibmcloud target`
  
-    To set any of these to new targets, add `-h` to the command to view the necessary flags for changing the targets  `ibmcloud target -h`
+    To set any of these to new targets, add `-h` to the command to view the necessary flags for changing the targets 
+    
+    `ibmcloud target -h`
  
     Example:
 
