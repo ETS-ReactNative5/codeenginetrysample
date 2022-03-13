@@ -207,7 +207,7 @@ To follow the steps in this code pattern, you need the following:
 
      ![](img/BuildRun.png)
 
-     For more information for troubleshooting:
+     [Troubleshooting tips]:(https://cloud.ibm.com/docs/codeengine?topic=codeengine-troubleshoot-build)
 
      `ibmcloud ce buildrun get -n destination-v1-buildrun` to check the build run status.
 
@@ -242,7 +242,7 @@ To follow the steps in this code pattern, you need the following:
      * `-m` specifies the amount of memory resources for each instance
      * `-e` is used for each environment variable used by the application
 
-     For more information for troubleshooting:
+     [Troubleshooting tips]:(https://cloud.ibm.com/docs/codeengine?topic=codeengine-troubleshoot-apps)
 
      Run `ibmcloud ce application get -n destination-v1` to check the application status.
 
@@ -264,14 +264,6 @@ To follow the steps in this code pattern, you need the following:
      microservices. 
      Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. 
      `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was seen from one of the previous command.
-
-     For more information for troubleshooting:
-
-     Run `ibmcloud ce application get -n ui` to check the application status.
-
-     Run `ibmcloud ce application events -n ui` to get the system events of the application instances.
-
-     Run `ibmcloud ce application logs -f -n ui` to follow the logs of the application instances.
 
       ![](img/code_engine_url.png)
 
