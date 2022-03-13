@@ -128,9 +128,8 @@ ibmcloud ce registry create --n myregistryjp --s jp.icr.io --u iamapikey --p "Co
 
 For Docker Hub, the server name is https://index.docker.io/v1/ .
 
-For Container Registry, the server name is `<region>.icr.io` .
+For Container Registry, the server name is `region.icr.io` .
 
-10. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
 ![](img/registryacess.png)
 
 9. Lets try building image using docker command.
@@ -187,7 +186,7 @@ It creates a build configuration that will turn the source code from Github into
 * `--cdr` specifies the directory in the Github repo where the Dockerfile to be used is
 * `--sz` specifies the size for the build which determines the amount of resources used. This is optional and the default value is `medium`.
 
-9. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
+9. Navigate to the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
  
 ![](img/ImageBuild.png)
 
@@ -246,10 +245,9 @@ Run `ibmcloud ce application logs -f -n destination-v1` to follow the logs of th
  ibmcloud ce app create -n "ui" -i "jp.icr.io/cesample/ui" -p 9000 --min 1 --cpu 0.25 -m 0.5G -e NODE_ENV=production -e DESTINATION_URL=http://destination-v1.iz7gckmh5qv.svc.cluster.local --registry-secret myregistryjp
 
 ```
- 
- ![](img/code_engine_url.png)
- 
-It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires external traffic. Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other microservices. Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was seen from one of the previous command.
+It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires external traffic. 
+Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other microservices. 
+Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was seen from one of the previous command.
 
 For more information for troubleshooting:
 
@@ -259,7 +257,11 @@ Run `ibmcloud ce application events -n ui` to get the system events of the appli
  
 Run `ibmcloud ce application logs -f -n ui` to follow the logs of the application instances.
 
-Notice how the minimum number of instances for each application of Bee Travels is set to 1: `--min 1`. This is due to the fact that we want Bee Travels to always be readily available for traffic without delay and needing an instance to be initialized via cold start. Use cases for using the default value of 0 for the mimimum number of instances for each application include:
+ ![](img/code_engine_url.png)
+
+Notice how the minimum number of instances for each application of Bee Travels is set to 1: `--min 1`. This is due to the fact that we want Bee Travels to always be readily available for traffic without delay and needing an instance to be initialized via cold start.
+
+Use cases for using the default value of 0 for the mimimum number of instances for each application include:
 
 * Application does not receive a high volume of traffic consistently
 * Cold start delays are not a concern
