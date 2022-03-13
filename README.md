@@ -1,8 +1,8 @@
-# Deploy a Microservices App to IBM Cloud Code Engine
+# Deploy an app to IBM Cloud Code Engine
 
-This code pattern introduces you to [Code Engine](https://www.ibm.com/cloud/code-engine) and shows how to deploy a microservice travel application to the managed serverless platform. 
-The travel application used in this code pattern is a part of the [Bee Travels](https://bee-travels.github.io/) project that focuses on some of the first version services of the application.
- The services included in this code pattern are:
+This code pattern introduces you to [Code Engine](https://www.ibm.com/cloud/code-engine) and shows how to deploy an application to the managed serverless platform. The application used in this code pattern is a part of the [Bee Travels project](https://bee-travels.github.io/) that focuses on some of the first version services of the application. 
+
+The services included in this code pattern are:
 
 * Destination v1 (Node.js)
 
@@ -12,7 +12,11 @@ Below is the architecture diagram of the Bee Travels application:
 
 ![](img/bee_travels_v1_architecture.png)
 
-[IBM Cloud Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-getting-started) is a managed serverless platform that can run both applications that serve HTTP requests which includes web applications or microservices as well as run batch jobs that run once in order to complete a task. These workloads are run within the same [Kubernetes](https://kubernetes.io/) infrastructure and take advantage of open source technology including [Knative](https://knative.dev/) and [Istio](https://istio.io/). Knative is used to manage the serverless aspect of hosting applications, which includes auto-scaling of them based on incoming load - including down to zero when they are idle. Istio is used for routing and traffic management of applications. In addition, Code Engine is integrated with [LogDNA](https://cloud.ibm.com/docs/log-analysis?topic=log-analysis-getting-started) to allow for logging of your applications. As a developer, the benefit to using Code Engine is that this Kubernetes infrastructure and cluster complexity is invisible to you. No Kubernetes training is needed and developers can just focus on their code.
+# What is IBM Cloud Code Engine?
+
+[IBM Cloud Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-getting-started) is a new [Serverless compute service](https://www.developer.com/cloud/what-is-serverless-computing/) that lets developers run application containers, code, and batch jobs in a fully managed container runtime. It allows development teams to have all of their cloud-native needs even if they do not have cloud-native skills or knowledge. This lets the development team live the dream of [focusing on code](https://cloud.ibm.com/docs/codeengine?topic=codeengine-about#benefits) instead of managing headaches or cloud infrastructure issues.
+
+In addition, Code Engine is integrated with [LogDNA](https://cloud.ibm.com/docs/log-analysis?topic=log-analysis-getting-started) to allow for logging of your applications. 
 
 # Architecture
 
@@ -75,8 +79,8 @@ To follow the steps in this code pattern, you need the following:
    ```
    ibmcloud ce project create -n "Bee Travels"
    ```
-    It creates a Code Engine project named `Bee Travels`. A project is a grouping of Code Engine applications and jobs. Creating a project allows for network 
-    isolation, sharing of resources (ex. secrets), and grouping together applications and jobs that are related.
+    A [project](https://cloud.ibm.com/docs/codeengine?topic=codeengine-about#terminology) is a grouping of Code Engine entities such as applications, jobs, and 
+    builds. A project is based on a Kubernetes namespace.
 
     To see list of projects in the targetted resource group 
 
@@ -137,7 +141,7 @@ To follow the steps in this code pattern, you need the following:
 
     ![](img/registryacess.png)
 
-10. Lets try building image using docker command.
+10. Lets try [building image](https://cloud.ibm.com/docs/Registry?topic=Registry-registry_images_&interface=ui#registry_images_source) using docker command.
  
      The docker build command builds Docker images from a Dockerfile.
 
@@ -176,11 +180,10 @@ To follow the steps in this code pattern, you need the following:
 
      https://cloud.ibm.com/registry/images
 
-14. Create a build configuration:
+14. Create a [build configuration](https://cloud.ibm.com/docs/codeengine?topic=codeengine-build-image#build-create-cli)
 
       ```
-      ibmcloud ce build create --n "destination-v1-build" --src "https://github.com/testrashmi/CESample"  --i "jp.icr.io/cesample/destination" --rs myregistryjp 
-      --cdr src/services/destination-v1 --sz small
+      ibmcloud ce build create --n "destination-v1-build" --src "https://github.com/testrashmi/codeenginetrysample" --i "jp.icr.io/cesample/destination" --rs myregistryjp --cdr src/services/destination-v1 --sz small
       ```
 
      It creates a build configuration that will turn the source code from Github into runnable container images for applications in Code Engine. 
@@ -196,7 +199,7 @@ To follow the steps in this code pattern, you need the following:
  
     ![](img/ImageBuild.png)
 
-16. Creating a build run from a repository:
+16. Creating a [build run](https://cloud.ibm.com/docs/codeengine?topic=codeengine-build-image#build-run-cli) from a repository:
 
      ```
      ibmcloud ce buildrun submit -b destination-v1-build -n destination-v1-buildrun -w
@@ -230,8 +233,17 @@ To follow the steps in this code pattern, you need the following:
      myregistryjp
      ```
 
-     It creates an application in our Code Engine project for our destination microservice. An application in Code Engine runs your code to serve HTTP requests with 
-     the number of running instances automatically scaled up or down. 
+    Output on terminal obtained is:
+
+    destination-v1.iz7gckmh5qv.svc.cluster.local
+
+    This will be used as an environment variable for the next command that we execute.
+    The command creates an application in our Code Engine project for our destination microservice. An application in Code Engine runs your code to serve HTTP 
+    requests with the number of running instances automatically scaled up or down.
+    
+    Since the other microservices use internal traffic, Code Engine uses the format <APP_NAME>.<ID>.svc.cluster.local as the entrypoint to an application. 
+    APP_NAME for each application is already defined in each ibmcloud ce app create command and ID was seen from one of the previous command.
+
      * `-n` names the application
      * `-i` points to the container image reference
      * `--cl` specifies that the application will only have a private endpoint and no exposure to external traffic. This can be used by backend services that do not
@@ -275,10 +287,20 @@ To follow the steps in this code pattern, you need the following:
      Notice how the minimum number of instances for each application of Bee Travels is set to 1: `--min 1`. This is due to the fact that we want Bee Travels to 
      always be readily available for traffic without delay and needing an instance to be initialized via cold start.
 
-     Use cases for using the default value of 0 for the mimimum number of instances for each application include:
+     **Use cases** for using the default value of 0 for the mimimum number of instances for each application include:
 
      * Application does not receive a high volume of traffic consistently
      * Cold start delays are not a concern
      * Interested in conserving resources and costs
 
-     For more details and documentation on the Code Engine CLI, go [here](https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli).
+    # Summary:
+ 
+     IBM Cloud Code Engine is a fully managed, serverless platform that runs your containerized workloads, including web apps, microservices, event-driven functions 
+     and batch jobs with run-to-completion characteristics. Code Engine even builds container images for you from your source code. Because these workloads are all      hosted within the same Code Engine platform, all of them can seamlessly work together. The Code Engine experience is designed so that you can focus on writing      code and not on the infrastructure that is needed to host it. 
+
+    # References: 
+ 
+    [Sitemap for Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-sitemap)
+ 
+    For more details and documentation on the Code Engine CLI, go [here](https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli) .
+
