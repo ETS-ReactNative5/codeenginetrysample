@@ -105,7 +105,7 @@ To follow the steps in this code pattern, you need the following:
 
     Navigate to https://cloud.ibm.com/iam/apikeys .
 
-    Click Create an IBM Cloud API key.
+    Click create an IBM Cloud API key.
 
     Enter a name and optional description for your API key and click Create.
 
