@@ -8,24 +8,23 @@ The travel application used in this code pattern is a part of the [Bee Travels](
 
 * UI (Node.js/React)
 
-Below is the architecture diagram for v1 of the Bee Travels application:
+Below is the architecture diagram of the Bee Travels application:
 
 ![](img/bee_travels_v1_architecture.png)
 
-[IBM Cloud Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-getting-started) is a managed serverless platform that can run both applications that serve HTTP requests which includes web applications or microservices as well as run batch jobs that run once in order to complete a task. These workloads are run within the same [Kubernetes](https://kubernetes.io/) infrastructure and take advantage of open source technology including [Knative](https://knative.dev/) and [Istio](https://istio.io/). Knative is used to manage the serverless aspect of hosting applications, which includes auto-scaling of them based on incoming load - including down to zero when they are idle. Istio is used for routing and traffic management of applications. In addition, Code Engine is integrated with [LogDNA](https://www.logdna.com/) to allow for logging of your applications. As a developer, the benefit to using Code Engine is that this Kubernetes infrastructure and cluster complexity is invisible to you. No Kubernetes training is needed and developers can just focus on their code.
+[IBM Cloud Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-getting-started) is a managed serverless platform that can run both applications that serve HTTP requests which includes web applications or microservices as well as run batch jobs that run once in order to complete a task. These workloads are run within the same [Kubernetes](https://kubernetes.io/) infrastructure and take advantage of open source technology including [Knative](https://knative.dev/) and [Istio](https://istio.io/). Knative is used to manage the serverless aspect of hosting applications, which includes auto-scaling of them based on incoming load - including down to zero when they are idle. Istio is used for routing and traffic management of applications. In addition, Code Engine is integrated with [LogDNA](https://cloud.ibm.com/docs/log-analysis?topic=log-analysis-getting-started) to allow for logging of your applications. As a developer, the benefit to using Code Engine is that this Kubernetes infrastructure and cluster complexity is invisible to you. No Kubernetes training is needed and developers can just focus on their code.
 
 # Architecture
 
 1. The Code Engine build feature clones the Github repo and builds the container images for the different Bee Travels microservices in the repo based on the provided Dockerfiles.
-2. The newly built container images get pushed to repos on the provided image registry which in this case is Dockerhub.
-3. Code Engine applications are created for the Bee Travels microservices from the newly built container images on Dockerhub.
+2. The newly built container images get pushed to repos on the provided [image registry](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started) which in this case is IBM Cloud Container Registry.
+3. Code Engine applications are created for the Bee Travels microservices from the newly built container images on IBM Cloud Container Registry.
 
 # Steps
 
 1. [Prerequisites](#1-prerequisites)
 2. [Clone the repo](#2-clone-the-repo)
 3. [Build and Deploy to Code Engine](#3-build-and-deploy-to-code-engine)
-4. [Generate Traffic](#4-generate-traffic)
 
 ## 1. Prerequisites
 
@@ -33,11 +32,10 @@ To follow the steps in this code pattern, you need the following:
 
 * [IBM Cloud account](https://cloud.ibm.com/registration)
 * [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started)
-* [Dockerhub account](https://hub.docker.com/)
 
 ## 2. Clone the repo
 
-Clone the `CESample` repo locally. In a terminal window, run:
+Clone the `codeenginetrysample` repo locally. In a terminal window, run:
 
 ```
 $ git clone https://github.com/testrashmi/codeenginetrysample
@@ -49,12 +47,12 @@ $ cd codeenginetrysample
 1. From a terminal window, login to your IBM Cloud account using the CLI command:
  `ibmcloud login --sso`
 
-2. Verify you are targeting the correct region, account, resource group, org and space by running `ibmcloud target`.
+2. Verify you are targeting the correct region, account, resource group, org and space by running
+ `ibmcloud target`.
  To set any of these to new targets, add `-h` to the command to view the necessary flags for changing the targets  `ibmcloud target -h`
+Example:
 
 `ibmcloud target -g RESOURCE_GROUP`
-
-ex:
 
 `ibmcloud target -g App`
 
