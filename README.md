@@ -1,6 +1,6 @@
 # Deploy a Microservices App to IBM Cloud Code Engine
 
-This code pattern introduces you to [Code Engine](https://www.ibm.com/cloud/code-engine) and shows how to deploy a polyglot microservice travel application to the managed serverless platform. 
+This code pattern introduces you to [Code Engine](https://www.ibm.com/cloud/code-engine) and shows how to deploy a microservice travel application to the managed serverless platform. 
 The travel application used in this code pattern is a part of the [Bee Travels](https://bee-travels.github.io/) project that focuses on some of the first version services of the application.
  The services included in this code pattern are:
 
