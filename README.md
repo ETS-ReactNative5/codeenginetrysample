@@ -83,7 +83,8 @@ To follow the steps in this code pattern, you need the following:
     Navigate here:
     https://cloud.ibm.com/codeengine/projects .
     "Bee Travels" is listed .
-    ![](img/Bee Travels.png)
+    
+    ![](img/BeeTravels.png)
 
 6. To determine the unique ID of the Project:
 
