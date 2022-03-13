@@ -128,7 +128,7 @@ ibmcloud ce registry create --n myregistryjp --s jp.icr.io --u iamapikey --p "Co
 
 For Docker Hub, the server name is https://index.docker.io/v1/ .
 
-For Container Registry, the server name is '<region>.icr.io' .
+For Container Registry, the server name is `<region>.icr.io` .
 
 10. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
 ![](img/registryacess.png)
