@@ -242,6 +242,7 @@ To follow the steps in this code pattern, you need the following:
     requests with the number of running instances automatically scaled up or down.
     
     Since the other microservices use internal traffic, Code Engine uses the format <APP_NAME>.<ID>.svc.cluster.local as the entrypoint to an application. 
+   
     APP_NAME for each application is already defined in each ibmcloud ce app create command and ID was seen from one of the previous command.
 
      * `-n` names the application
