@@ -274,10 +274,13 @@ To follow the steps in this code pattern, you need the following:
      ```
      It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires 
      external traffic. 
+   
      Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The 
      URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other 
      microservices. 
+   
      Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. 
+   
      `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was seen from one of the previous command.
 
       ![](img/code_engine_url.png)
