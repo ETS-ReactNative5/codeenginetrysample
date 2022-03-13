@@ -301,6 +301,8 @@ To follow the steps in this code pattern, you need the following:
  
      Congratulations, you just deployed the App successfully.
    
+     ![](img/URL.png)
+   
      Launch the URL of the App.
    
       ![](img/AppLaunch.png)
