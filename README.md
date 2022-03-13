@@ -137,26 +137,26 @@ To follow the steps in this code pattern, you need the following:
 
 10. Lets try building image using docker command.
  
-   The docker build command builds Docker images from a Dockerfile.
+     The docker build command builds Docker images from a Dockerfile.
 
-   Switch to the directory 'src/services/ui' in the gitrepo codeenginetrysample.
+     Switch to the directory 'src/services/ui' in the gitrepo codeenginetrysample.
 
-   Then,
+     Then,
 
-   ```
-   docker build -t <image_name> <directory>
-   ```
-   example:
+     ```
+     docker build -t <image_name> <directory>
+     ```
+     example:
 
-   `docker build -t ui .`
+     `docker build -t ui .`
 
-   To list docker images:
+     To list docker images:
 
-   `docker images`
+     `docker images`
 
-   Then,
+     Then,
 
-   `docker tag ui:latest jp.icr.io/cesample/ui:latest`
+     `docker tag ui:latest jp.icr.io/cesample/ui:latest`
 
 11. Log in to IBM Cloud Container Registry.
  
