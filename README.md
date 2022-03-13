@@ -51,6 +51,7 @@ $ cd codeenginetrysample
 2. Verify you are targeting the correct region, account, resource group, org and space by running
 
  `ibmcloud target`.
+ 
  To set any of these to new targets, add `-h` to the command to view the necessary flags for changing the targets  `ibmcloud target -h`
  
 Example:
@@ -186,9 +187,9 @@ It creates a build configuration that will turn the source code from Github into
 * `--cdr` specifies the directory in the Github repo where the Dockerfile to be used is
 * `--sz` specifies the size for the build which determines the amount of resources used. This is optional and the default value is `medium`.
 
-9. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects
-Select "Image Builds" on the left hand side
-"destination-v1-build" is listed
+9. Navigate within the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
+ 
+![](img/ImageBuild.png)
 
 10. Creating a build run from a repository:
 
@@ -201,18 +202,21 @@ It starts and runs the build configuration that was created on the previous line
 * `-n` names the build run
 * `-w` waits for the build run to complete before moving on to the next line of the shell script. This is optional.
 
+ ![](img/BuildRun.png)
+ 
 For more information for troubleshooting:
 
-`ibmcloud ce buildrun get -n destination-v1-buildrun`
+`ibmcloud ce buildrun get -n destination-v1-buildrun` to check the build run status.
  
-`ibmcloud ce buildrun events -n destination-v1-buildrun`
+`ibmcloud ce buildrun events -n destination-v1-buildrun` to get the system events of the build run.
  
-`ibmcloud ce buildrun logs -f -n destination-v1-buildrun`
+`ibmcloud ce buildrun logs -f -n destination-v1-buildrun` to follow the logs of the build run.
 
 12. The image created can be found here:
+ 
 https://cloud.ibm.com/registry/images
-Click on the image:
-Image details are seen .
+ 
+Click on the image and the image details are seen .
 
 13. Deploying your app:
  
@@ -245,7 +249,7 @@ Run `ibmcloud ce application logs -f -n destination-v1` to follow the logs of th
  
  ![](img/code_engine_url.png)
  
-It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires external traffic. Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other microservices. Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was gotten from one of the previous commands in this script.
+It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires external traffic. Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other microservices. Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was seen from one of the previous command.
 
 For more information for troubleshooting:
 
