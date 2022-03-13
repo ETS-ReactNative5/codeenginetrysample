@@ -135,7 +135,7 @@ To follow the steps in this code pattern, you need the following:
 
     ![](img/registryacess.png)
 
-9. Lets try building image using docker command.
+10. Lets try building image using docker command.
  
    The docker build command builds Docker images from a Dockerfile.
 
@@ -158,28 +158,28 @@ To follow the steps in this code pattern, you need the following:
 
    `docker tag ui:latest jp.icr.io/cesample/ui:latest`
 
-10. Log in to IBM Cloud Container Registry.
+11. Log in to IBM Cloud Container Registry.
  
-   `ibmcloud cr region-set jp.icr.io`
+    `ibmcloud cr region-set jp.icr.io`
 
-11. Perform docker image push to share your images to the registry.
+12. Perform docker image push to share your images to the registry.
  
-   `docker push jp.icr.io/cesample/ui:latest`
+    `docker push jp.icr.io/cesample/ui:latest`
 
-12. To ensure the image is created:
+13. To ensure the image is created:
  
-   `ibmcloud cr images`
+    `ibmcloud cr images`
 
-    The image created gets listed with location chosen as Tokyo.
+     The image created gets listed with location chosen as Tokyo.
 
-    https://cloud.ibm.com/registry/images
+     https://cloud.ibm.com/registry/images
 
-13. Create a build configuration:
+14. Create a build configuration:
 
-     ```
-     ibmcloud ce build create --n "destination-v1-build" --src "https://github.com/testrashmi/CESample"  --i "jp.icr.io/cesample/destination" --rs myregistryjp 
-     --cdr src/services/destination-v1 --sz small
-     ```
+      ```
+      ibmcloud ce build create --n "destination-v1-build" --src "https://github.com/testrashmi/CESample"  --i "jp.icr.io/cesample/destination" --rs myregistryjp 
+      --cdr src/services/destination-v1 --sz small
+      ```
 
      It creates a build configuration that will turn the source code from Github into runnable container images for applications in Code Engine. 
 
@@ -190,98 +190,100 @@ To follow the steps in this code pattern, you need the following:
      * `--cdr` specifies the directory in the Github repo where the Dockerfile to be used is
      * `--sz` specifies the size for the build which determines the amount of resources used. This is optional and the default value is `medium`.
 
-9. Navigate to the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
+15. Navigate to the project "Bee Travels" from https://cloud.ibm.com/codeengine/projects.
  
-   ![](img/ImageBuild.png)
+    ![](img/ImageBuild.png)
 
-10. Creating a build run from a repository:
+16. Creating a build run from a repository:
 
-    ```
-    ibmcloud ce buildrun submit -b destination-v1-build -n destination-v1-buildrun -w
-    ```
+     ```
+     ibmcloud ce buildrun submit -b destination-v1-build -n destination-v1-buildrun -w
+     ```
 
-    It starts and runs the build configuration that was created on the previous line. 
-    * `-b` the name of the build configuration to run the build
-    * `-n` names the build run
-    * `-w` waits for the build run to complete before moving on to the next line of the shell script. This is optional.
+     It starts and runs the build configuration that was created on the previous line. 
+     * `-b` the name of the build configuration to run the build
+     * `-n` names the build run
+     * `-w` waits for the build run to complete before moving on to the next line of the shell script. This is optional.
 
      ![](img/BuildRun.png)
 
-    For more information for troubleshooting:
+     For more information for troubleshooting:
 
-    `ibmcloud ce buildrun get -n destination-v1-buildrun` to check the build run status.
+     `ibmcloud ce buildrun get -n destination-v1-buildrun` to check the build run status.
 
-    `ibmcloud ce buildrun events -n destination-v1-buildrun` to get the system events of the build run.
+     `ibmcloud ce buildrun events -n destination-v1-buildrun` to get the system events of the build run.
 
-    `ibmcloud ce buildrun logs -f -n destination-v1-buildrun` to follow the logs of the build run.
+     `ibmcloud ce buildrun logs -f -n destination-v1-buildrun` to follow the logs of the build run.
 
-12. The image created can be found here:
+17. The image created can be found here:
  
-    https://cloud.ibm.com/registry/images
+     https://cloud.ibm.com/registry/images
 
-    Click on the image and the image details are seen .
+     Click on the image and the image details are seen .
 
-13. Deploying your app destination-v1  :
+18. Deploying your app destination-v1  :
  
-    ```
+     ```
      ibmcloud ce app create -n "destination-v1" -i "jp.icr.io/cesample/destination" -cl -p 9001 --min 1 --cpu 0.25 -m 0.5G -e LOG_LEVEL=info --registry-secret
      myregistryjp
-    ```
+     ```
 
-    It creates an application in our Code Engine project for our destination microservice. An application in Code Engine runs your code to serve HTTP requests with 
-    the number of running instances automatically scaled up or down. 
-    * `-n` names the application
-    * `-i` points to the container image reference
-    * `--cl` specifies that the application will only have a private endpoint and no exposure to external traffic. This can be used by backend services that do not
-     need exposure to outside traffic and only communicate between other services of an application. By not exposing applications that don't need external exposure,
-     this may also save potential security risks
-    * `-p` specifies the listening port. This only needs to be set when the port used by the application is not the default 8080
-    * `--min` specifies the minimum number of instances of the application running. The default value is 0
-    * `--cpu` specifies the amount of CPU resources for each instance
-    * `-m` specifies the amount of memory resources for each instance
-    * `-e` is used for each environment variable used by the application
+     It creates an application in our Code Engine project for our destination microservice. An application in Code Engine runs your code to serve HTTP requests with 
+     the number of running instances automatically scaled up or down. 
+     * `-n` names the application
+     * `-i` points to the container image reference
+     * `--cl` specifies that the application will only have a private endpoint and no exposure to external traffic. This can be used by backend services that do not
+      need exposure to outside traffic and only communicate between other services of an application. By not exposing applications that don't need external 
+      exposure,
+      this may also save potential security risks
+     * `-p` specifies the listening port. This only needs to be set when the port used by the application is not the default 8080
+     * `--min` specifies the minimum number of instances of the application running. The default value is 0
+     * `--cpu` specifies the amount of CPU resources for each instance
+     * `-m` specifies the amount of memory resources for each instance
+     * `-e` is used for each environment variable used by the application
 
-    For more information for troubleshooting:
+     For more information for troubleshooting:
 
-    Run `ibmcloud ce application get -n destination-v1` to check the application status.
+     Run `ibmcloud ce application get -n destination-v1` to check the application status.
 
-    Run `ibmcloud ce application events -n destination-v1` to get the system events of the application instances.
+     Run `ibmcloud ce application events -n destination-v1` to get the system events of the application instances.
 
-    Run `ibmcloud ce application logs -f -n destination-v1` to follow the logs of the application instances.
+     Run `ibmcloud ce application logs -f -n destination-v1` to follow the logs of the application instances.
 
-14. Deploying your app ui  :
+19. Deploying your app ui  :
 
-    ```
+     ```
      ibmcloud ce app create -n "ui" -i "jp.icr.io/cesample/ui" -p 9000 --min 1 --cpu 0.25 -m 0.5G -e NODE_ENV=production -e DESTINATION_URL=http://destination-
      v1.iz7gckmh5qv.svc.cluster.local --registry-secret myregistryjp
 
-    ```
-    It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires 
-    external traffic. 
-    Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The 
-    URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other microservices. 
-    Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. 
-    `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was seen from one of the previous command.
+     ```
+     It creates an application in our Code Engine project for the UI microservice. This is the microservice that users will interact with and therefore requires 
+     external traffic. 
+     Notice how this command does not have the `--cl` flag. The removal of this flag allows for external traffic and a URL to be generated for the application. The 
+     URL is secured automatically. In addition, some of the environment variables for this microservice specify the URLs to communicate with the other 
+     microservices. 
+     Since the other microservices use internal traffic, Code Engine uses the format `<APP_NAME>.<ID>.svc.cluster.local` as the entrypoint to an application. 
+     `APP_NAME` for each application is already defined in each `ibmcloud ce app create` command and `ID` was seen from one of the previous command.
 
-    For more information for troubleshooting:
+     For more information for troubleshooting:
 
-    Run `ibmcloud ce application get -n ui` to check the application status.
+     Run `ibmcloud ce application get -n ui` to check the application status.
 
-    Run `ibmcloud ce application events -n ui` to get the system events of the application instances.
+     Run `ibmcloud ce application events -n ui` to get the system events of the application instances.
 
-    Run `ibmcloud ce application logs -f -n ui` to follow the logs of the application instances.
+     Run `ibmcloud ce application logs -f -n ui` to follow the logs of the application instances.
 
-     ![](img/code_engine_url.png)
+      ![](img/code_engine_url.png)
 
-     ![](img/MinimumInstance.png)
+      ![](img/MinimumInstance.png)
 
-    Notice how the minimum number of instances for each application of Bee Travels is set to 1: `--min 1`. This is due to the fact that we want Bee Travels to 
-    always be readily available for traffic without delay and needing an instance to be initialized via cold start.
+     Notice how the minimum number of instances for each application of Bee Travels is set to 1: `--min 1`. This is due to the fact that we want Bee Travels to 
+     always be readily available for traffic without delay and needing an instance to be initialized via cold start.
 
-    Use cases for using the default value of 0 for the mimimum number of instances for each application include:
+     Use cases for using the default value of 0 for the mimimum number of instances for each application include:
 
-    * Application does not receive a high volume of traffic consistently
-    * Cold start delays are not a concern
-    * Interested in conserving resources and costs
+     * Application does not receive a high volume of traffic consistently
+     * Cold start delays are not a concern
+     * Interested in conserving resources and costs
 
-    For more details and documentation on the Code Engine CLI, go [here](https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli).
+     For more details and documentation on the Code Engine CLI, go [here](https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli).
