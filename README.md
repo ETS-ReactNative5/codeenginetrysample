@@ -217,7 +217,7 @@ https://cloud.ibm.com/registry/images
  
 Click on the image and the image details are seen .
 
-13. Deploying your app:
+13. Deploying your app destination-v1  :
  
 ```
  ibmcloud ce app create -n "destination-v1" -i "jp.icr.io/cesample/destination" -cl -p 9001 --min 1 --cpu 0.25 -m 0.5G -e LOG_LEVEL=info --registry-secret myregistryjp
@@ -240,6 +240,8 @@ Run `ibmcloud ce application get -n destination-v1` to check the application sta
 Run `ibmcloud ce application events -n destination-v1` to get the system events of the application instances.
  
 Run `ibmcloud ce application logs -f -n destination-v1` to follow the logs of the application instances.
+
+14. Deploying your app ui  :
 
 ```
  ibmcloud ce app create -n "ui" -i "jp.icr.io/cesample/ui" -p 9000 --min 1 --cpu 0.25 -m 0.5G -e NODE_ENV=production -e DESTINATION_URL=http://destination-v1.iz7gckmh5qv.svc.cluster.local --registry-secret myregistryjp
