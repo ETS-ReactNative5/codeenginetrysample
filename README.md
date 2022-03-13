@@ -261,6 +261,8 @@ Run `ibmcloud ce application logs -f -n ui` to follow the logs of the applicatio
 
  ![](img/code_engine_url.png)
 
+ ![](img/MinimumInstance.png)
+ 
 Notice how the minimum number of instances for each application of Bee Travels is set to 1: `--min 1`. This is due to the fact that we want Bee Travels to always be readily available for traffic without delay and needing an instance to be initialized via cold start.
 
 Use cases for using the default value of 0 for the mimimum number of instances for each application include:
