@@ -207,7 +207,7 @@ To follow the steps in this code pattern, you need the following:
 
      ![](img/BuildRun.png)
 
-    * [Troubleshooting tips](https://cloud.ibm.com/docs/codeengine?topic=codeengine-troubleshoot-build)
+    [Troubleshooting tips](https://cloud.ibm.com/docs/codeengine?topic=codeengine-troubleshoot-build)
 
      `ibmcloud ce buildrun get -n destination-v1-buildrun` to check the build run status.
 
@@ -243,7 +243,7 @@ To follow the steps in this code pattern, you need the following:
      * `-e` is used for each environment variable used by the application
 
 
-    * [Troubleshooting tips](https://cloud.ibm.com/docs/codeengine?topic=codeengine-troubleshoot-apps)
+   [Troubleshooting tips](https://cloud.ibm.com/docs/codeengine?topic=codeengine-troubleshoot-apps)
 
      Run `ibmcloud ce application get -n destination-v1` to check the application status.
 
