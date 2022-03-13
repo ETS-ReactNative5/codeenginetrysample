@@ -299,8 +299,11 @@ To follow the steps in this code pattern, you need the following:
 
     # Summary:
  
-     IBM Cloud Code Engine is a fully managed, serverless platform that runs your containerized workloads, including web apps, microservices, event-driven functions 
-     and batch jobs with run-to-completion characteristics. Code Engine even builds container images for you from your source code. Because these workloads are all      hosted within the same Code Engine platform, all of them can seamlessly work together. The Code Engine experience is designed so that you can focus on writing      code and not on the infrastructure that is needed to host it. 
+     Congratulations, you just deployed the App successfully.
+   
+     Launch the URL of the App.
+   
+      ![](img/AppLaunch.png)
 
     # References: 
  
