@@ -62,7 +62,7 @@ To follow the steps in this code pattern, you need the following:
 
 3. Install the IBM Cloud Code Engine plug-in for the IBM Cloud CLI by running: 
 
-  `ibmcloud plugin install code-engine`
+   `ibmcloud plugin install code-engine`
 
 4. Verify the plug-in is installed by running `ibmcloud plugin list` and seeing `code-engine[ce]` in the list of plug-ins.
 
