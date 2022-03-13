@@ -233,9 +233,9 @@ To follow the steps in this code pattern, you need the following:
      myregistryjp
      ```
 
-    Output on terminal obtained is:
+    **Output on terminal obtained is:**
 
-    destination-v1.iz7gckmh5qv.svc.cluster.local
+    `destination-v1.iz7gckmh5qv.svc.cluster.local`
 
     This will be used as an environment variable for the next command that we execute.
     The command creates an application in our Code Engine project for our destination microservice. An application in Code Engine runs your code to serve HTTP 
