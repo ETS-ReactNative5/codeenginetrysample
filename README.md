@@ -312,15 +312,13 @@ To follow the steps in this code pattern, you need the following:
    
        ![](img/LoadIncrease.png)
    
-      
-   
    ## Summary
    
-       Congratulations, you just deployed the App successfully
-       ![](img/URL.png)
+   Congratulations, you just deployed the App successfully
+   ![](img/URL.png)
    
-       Launch the URL of the App
-       ![](img/AppLaunch.png)
+   Launch the URL of the App
+   ![](img/AppLaunch.png)
 
    ## References
  
