@@ -312,18 +312,15 @@ To follow the steps in this code pattern, you need the following:
    
         ![](img/LoadIncrease.png)
    
+   ## Summary
    
- ## Summary
- 
-     Congratulations, you just deployed the App successfully.
-   
+     Congratulations, you just deployed the App successfully
      ![](img/URL.png)
    
-     Launch the URL of the App.
-   
+     Launch the URL of the App
      ![](img/AppLaunch.png)
 
- ## References
+   ## References
  
     [Sitemap for Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-sitemap)
  
