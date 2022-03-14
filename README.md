@@ -306,11 +306,11 @@ To follow the steps in this code pattern, you need the following:
    
        ![](img/OpenURL.png)
    
-       ![](Load.png)
+       ![](img/Load.png)
    
    21. Press the Generate Load button on the load generation tool and watch how the number of instances of the ui application auto-scale up to 10 while traffic is          being generated and back down to 1 once the traffic stops.
    
-        ![](LoadIncrease.png)
+        ![](img/LoadIncrease.png)
    
    
     # Summary:
