@@ -301,7 +301,7 @@ To follow the steps in this code pattern, you need the following:
    
       Open up a second window of your web browser side by side with the first window and go to https://load.fun.cloud.ibm.com to access the IBM load generator tool.
    
-      For the URL to enter, copy/paste the https://ui.<NAMESPACE>.<REGION>.codeengine.appdomain.cloud URL that is used to access the Bee Travels application.
+      For the URL to enter, copy/paste the `https://ui.<NAMESPACE>.<REGION>.codeengine.appdomain.cloud` URL that is used to access the Bee Travels application.
       You can also retrieve this URL from your first web browser URL by copying the URL from the Open Application URL button.
    
        ![](img/OpenURL.png)
@@ -313,7 +313,7 @@ To follow the steps in this code pattern, you need the following:
         ![](img/LoadIncrease.png)
    
    
-    # Summary:
+    ## Summary:
  
      Congratulations, you just deployed the App successfully.
    
@@ -323,7 +323,7 @@ To follow the steps in this code pattern, you need the following:
    
      ![](img/AppLaunch.png)
 
-    # References: 
+    ## References: 
  
     [Sitemap for Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-sitemap)
  
