@@ -308,22 +308,23 @@ To follow the steps in this code pattern, you need the following:
    
        ![](img/Load.png)
    
-   21. Press the Generate Load button on the load generation tool and watch how the number of instances of the ui application auto-scale up to 10 while traffic is          being generated 
+   21. Press the Generate Load button on the load generation tool and watch how the number of instances of the ui application auto-scale up to 10        while traffic is being generated and back down to 1 once the traffic stops.
    
-      ![](img/LoadIncrease.png)
-      and back down to 1 once the traffic stops.
+       ![](img/LoadIncrease.png)
+   
+      
    
    ## Summary
    
-     Congratulations, you just deployed the App successfully
-     ![](img/URL.png)
+       Congratulations, you just deployed the App successfully
+       ![](img/URL.png)
    
-     Launch the URL of the App
-     ![](img/AppLaunch.png)
+       Launch the URL of the App
+       ![](img/AppLaunch.png)
 
    ## References
  
-    [Sitemap for Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-sitemap)
+      [Sitemap for Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-sitemap)
  
-    For more details and documentation on the Code Engine CLI, go [here](https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli) .
+      For more details and documentation on the Code Engine CLI, go [here](https://cloud.ibm.com/docs/codeengine?topic=codeengine-cli) .
 
