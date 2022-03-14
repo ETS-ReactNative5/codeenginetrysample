@@ -313,7 +313,7 @@ To follow the steps in this code pattern, you need the following:
         ![](img/LoadIncrease.png)
    
    
- ## Summary:
+ ## Summary
  
      Congratulations, you just deployed the App successfully.
    
@@ -323,7 +323,7 @@ To follow the steps in this code pattern, you need the following:
    
      ![](img/AppLaunch.png)
 
- ## References: 
+ ## References
  
     [Sitemap for Code Engine](https://cloud.ibm.com/docs/codeengine?topic=codeengine-sitemap)
  
