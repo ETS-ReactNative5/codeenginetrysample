@@ -310,7 +310,7 @@ To follow the steps in this code pattern, you need the following:
    
    21. Press the Generate Load button on the load generation tool and watch how the number of instances of the ui application auto-scale up to 10 while traffic is          being generated and back down to 1 once the traffic stops.
    
-        ![](LoadIncrease.png )
+        ![](LoadIncrease.png)
    
    
     # Summary:
@@ -321,7 +321,7 @@ To follow the steps in this code pattern, you need the following:
    
      Launch the URL of the App.
    
-      ![](img/AppLaunch.png)
+     ![](img/AppLaunch.png)
 
     # References: 
  
