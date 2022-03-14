@@ -296,7 +296,23 @@ To follow the steps in this code pattern, you need the following:
      * Application does not receive a high volume of traffic consistently
      * Cold start delays are not a concern
      * Interested in conserving resources and costs
-
+   
+  20. IBM Cloud Load Generator Service:
+   
+      Open up a second window of your web browser side by side with the first window and go to https://load.fun.cloud.ibm.com to access the IBM load generator tool.
+   
+      For the URL to enter, copy/paste the https://ui.<NAMESPACE>.<REGION>.codeengine.appdomain.cloud URL that is used to access the Bee Travels application.
+      You can also retrieve this URL from your first web browser URL by copying the URL from the Open Application URL button.
+   
+       ![](img/OpenURL.png)
+   
+       ![](Load.png)
+   
+   21. Press the Generate Load button on the load generation tool and watch how the number of instances of the ui application auto-scale up to 10 while traffic is          being generated and back down to 1 once the traffic stops.
+   
+        ![](LoadIncrease.png )
+   
+   
     # Summary:
  
      Congratulations, you just deployed the App successfully.
